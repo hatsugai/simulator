@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simulator</title>
+    <script type="text/javascript" src="main.bc.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="container">
+    <div id="top">
+      <div id="control-bar">
+        <input id="file" type="file" style="display: none;" />
+        <button id="load" class="input" type="button">load</button>
+        <button id="save" class="input" type="button">save</button>
+        <button id="clone" class="input" type="button">clone</button>
+        <button id="restart" class="input" type="button">restart</button>
+        <button id="redo" class="input" type="button">redo</button>
+        <button id="undo" class="input" type="button">undo</button>
+        <input type="text" id="cur_time" class="input" readonly />
+        <input type="text" id="time_spec" class="input" />
+        <button id="advance" class="input" type="button">advance</button>
+      </div>
+      <div id="memo-bar">
+        <div id="memo-title">memo:</div>
+        <input id="memo" type="text" class="input" />
+      </div>
+    </div>
+    <div id="main-panel">
+      <div id="left-panel">
+        <div id="container2-1-1">
+          <div class="section-title">Transitions</div>
+          <div id="trans" class="vscroll"></div>
+        </div>
+
+        <div id="container2-1-2">
+          <div id="title-history" class="section-title">History</div>
+          <div id="history" class="vscroll"></div>
+        </div>
+      </div>
+
+      <div id="divider1" class="divider"></div>
+
+      <div id="right-panel">
+        <div id="container2-2-1">
+          <div id="state_status" class="section-title">Current State</div>
+          <div id="state" class="state hscroll"></div>
+        </div>
+
+        <div id="container2-2-2">
+          <div id="title-target" class="section-title">Target State</div>
+          <div id="target" class="state hscroll"></div>
+        </div>
+      </div>
+
+      <div id="divider2" class="divider"></div>
+
+      <div id="container1-3">
+        <div class="section-title">Sequence</div>
+        <svg id="seq-header" xmlns="http://www.w3.org/2000/svg" ></svg>
+        <div id="container3-1" class="vscroll">
+          <svg id="sequence" xmlns="http://www.w3.org/2000/svg" ></svg>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div id="dpi"></div>
+</body>
+</html>
