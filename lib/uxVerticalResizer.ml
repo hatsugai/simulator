@@ -18,7 +18,7 @@ let init
     if !capture then
       begin
         let rect = parent##getBoundingClientRect in
-        let new_size = (float_of_int event##.clientY) -. rect##.top -. (float_of_int !y0) in
+        let new_size = (float_of_int event##.clientY) -. Js.float_of_number rect##.top -. (float_of_int !y0) in
         child##.style##.height :=
           Js.string (Printf.sprintf "%.0fpx" new_size);
         Js._false
@@ -38,7 +38,7 @@ let init
   in
 
   let on_down (event : Dom_html.mouseEvent Js.t) =
-    y0 := event##.offsetY;
+    y0 := int_of_float (Js.float_of_number event##.offsetY);
     capture := true;
     ehdr_id_ref_up :=
       Some (Dom.addEventListener

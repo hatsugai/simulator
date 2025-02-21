@@ -64,7 +64,7 @@ let create_text svg css_class text =
   Js.Unsafe.set elem (Js.string "textContent") (Js.string text);
   Dom.appendChild svg elem;
   let r = elem##getBBox in
-  (elem, r##.width, r##.height)
+  (elem, Js.float_of_number r##.width, Js.float_of_number r##.height)
 
 let create_label ?(hilight=false) svg text =
   create_text svg
@@ -412,7 +412,7 @@ let init
   in
 
   let device_pixel_ratio = Dom_html.window##.devicePixelRatio in
-  printf "device_pixel_ratio: %f\n" device_pixel_ratio;
+  printf "device_pixel_ratio: %f\n" (Js.float_of_number device_pixel_ratio);
 
   let ratio =
     match config.sequence_diagram_ppi_opt with

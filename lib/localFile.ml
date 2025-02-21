@@ -36,23 +36,23 @@ let setup_download (action : bytes -> unit) =
   in
 
   let on_file_selected input _ =
-    let files : File.fileList Js.t Js.optdef = input##.files in
-    match Js.Optdef.to_option files with
-    | Some (file_list : File.fileList Js.t) when file_list##.length > 0 ->
-       let file : File.file Js.t Js.opt = file_list##item 0 in
-       begin
-         match Js.Opt.to_option file with
-         | Some (file : File.file Js.t) ->
-            let file_reader : File.fileReader Js.t =
-              new%js File.fileReader
-            in
-            file_reader##.onload :=
-              Dom.handler (on_load_file file_reader);
-            file_reader##readAsArrayBuffer file
-         | None -> ()
-       end;
-       Js._true
-    | _ -> Js._true
+    let file_list : File.fileList Js.t = input##.files in
+    if file_list##.length > 0 then
+      let file : File.file Js.t Js.opt = file_list##item 0 in
+      begin
+        match Js.Opt.to_option file with
+        | Some (file : File.file Js.t) ->
+           let file_reader : File.fileReader Js.t =
+             new%js File.fileReader
+           in
+           file_reader##.onload :=
+             Dom.handler (on_load_file file_reader);
+           file_reader##readAsArrayBuffer file
+        | None -> ()
+      end;
+      Js._true
+    else
+      Js._true
   in
   input##.onchange :=
     Dom_html.handler (on_file_selected input)

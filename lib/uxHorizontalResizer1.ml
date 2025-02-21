@@ -21,7 +21,7 @@ let init
     if !capture then
       begin
         let rect = parent##getBoundingClientRect in
-        let w1 = (float_of_int event##.clientX) -. rect##.left -. (float_of_int !x0) in
+        let w1 = (float_of_int event##.clientX) -. Js.float_of_number rect##.left -. (float_of_int !x0) in
         let w2 = !w_sum -. w1 in
         child1##.style##.width :=
           Js.string (Printf.sprintf "%.0fpx" w1);
@@ -44,11 +44,10 @@ let init
   in
 
   let on_down (event : Dom_html.mouseEvent Js.t) =
-    x0 := event##.offsetX;
+    x0 := int_of_float (Js.float_of_number event##.offsetX);
     let r1 = child1##getBoundingClientRect in
     let r2 = child2##getBoundingClientRect in
-    w_sum := Js.Optdef.get r1##.width (fun () -> 0.0)
-         +. Js.Optdef.get r2##.width (fun () -> 0.0);
+    w_sum := Js.float_of_number r1##.width +. Js.float_of_number r2##.width;
     capture := true;
     ehdr_id_ref_up :=
       Some (Dom.addEventListener

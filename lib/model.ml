@@ -57,7 +57,7 @@ let clone_simulator ui_state =
               Js.Unsafe.meth_call clone_win "postMessage"
                 [| Js.Unsafe.inject ui_state;
                    Js.Unsafe.inject target_origin |]))
-         100.0
+         (Js.number_of_float 100.0)
      in
      ()
 
